@@ -1,0 +1,72 @@
+	if (shade == 0) {
+	  //draw_cylinder();
+	  glPushMatrix();
+	  glTranslatef(-0.5, 0, 0);
+	  draw_chair1();
+	  glPopMatrix();
+	  glPushMatrix();
+	  glTranslatef(-1.75, 0.25, 0);
+	  glRotatef(-20, 0, 0, 1);
+	  draw_chair2();
+	  glPopMatrix();
+	}
+	else if (shade == 1) {
+	  glPushMatrix();
+	  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_black);
+	  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_black);
+	  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, mat_black);
+	  glMultMatrixf(m); /* apply shading matrix */
+	  draw_scene(0);
+	  glPopMatrix();
+	}
+
+
+void draw_chair1()
+{  
+	/* draw first chair */
+
+	/* chair legs */
+        glPushMatrix(); /* push curr matrix down stack and copy to top of stack */
+        glTranslatef(2.5, -2.5, 0);      /* translate cylinder front and left. */
+	glScalef(0.15, 0.15, 1);          /* scale to be narrow and tall */
+	gluCylinder(quadratic,1.0f,0.0f,1.0f,32,32);
+        glPopMatrix(); /* replace curr matrix with previously pushed matrix */
+
+        glPushMatrix(); /* push curr matrix down stack and copy to top of stack */
+        glTranslatef(2.5, -2.85, 0);      /* translate cylinder front and left. */
+	glScalef(0.15, 0.15, 1);          /* scale to be narrow and tall */
+	gluCylinder(quadratic,1.0f,0.0f,1.0f,32,32);
+        glPopMatrix(); /* replace curr matrix with previously pushed matrix */
+
+        glPushMatrix(); /* push curr matrix down stack and copy to top of stack */
+        glTranslatef(2.85, -2.5, 0);      /* translate cylinder front and left. */
+	glScalef(0.15, 0.15, 1);          /* scale to be narrow and tall */
+	gluCylinder(quadratic,1.0f,0.0f,1.0f,32,32);
+        glPopMatrix(); /* replace curr matrix with previously pushed matrix */
+
+        glPushMatrix(); /* push curr matrix down stack and copy to top of stack */
+        glTranslatef(2.85, -2.85, 0);      /* translate cylinder front and left. */
+	glScalef(0.15, 0.15, 1);          /* scale to be narrow and tall */
+	gluCylinder(quadratic,1.0f,0.0f,1.0f,32,32);
+        glPopMatrix(); /* replace curr matrix with previously pushed matrix */
+
+	/* seat */
+	glPushMatrix();
+        glTranslatef(2.675, -2.675, 0.95); 
+	glScalef(0.35, 0.35, 0.10);
+	gluCylinder(quadratic,0.0f,1.0f,1.0f,32,32);
+	glPopMatrix();
+
+	glPushMatrix();
+        glTranslatef(2.675, -2.675, 1.10); 
+	glScalef(0.35, 0.35, 0.15);
+	gluCylinder(quadratic,1.0f,0.0f,1.0f,32,32);
+	glPopMatrix();
+
+	/* back */
+	glPushMatrix();
+        glTranslatef(2.85, -2.85, 1.75);
+	glRotatef(110, 1, 0, 0);         /* rotate 110 degree angle */ 
+	glScalef(0.35, 0.55, 0.25);
+	gluCylinder(quadratic,0.0f,1.0f,1.0f,32,32);
+	glPopMatrix();
